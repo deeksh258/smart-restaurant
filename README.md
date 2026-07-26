@@ -5,7 +5,7 @@ availability, bookings require confirmation to reduce no-shows, and each table's
 QR code connects customers directly to their assigned waiter.
 
 ## Team Name
-_(fill in)_
+odd thinker
 
 ## Tech Stack
 - Frontend: Next.js 14 (App Router) + Tailwind CSS
