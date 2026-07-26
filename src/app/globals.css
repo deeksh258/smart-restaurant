@@ -1,18 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-bg: #FAF8F5;
-  --color-ink: #2B2420;
-  --color-accent: #B0431E;
-  --color-accent-soft: #F2D9C7;
-  --color-good: #3F6B4A;
-  --color-warn: #C98A1A;
+  --coal: #1E1A16;
+  --paper: #F6F1E7;
+  --ink: #2B2420;
+  --brass: #B8793A;
+  --brass-soft: #EDD9BC;
+  --sage: #4C7A5D;
+  --sage-soft: #DCE8DD;
+  --rust: #9C4A3C;
+  --rust-soft: #F0DAD3;
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-ink);
+  background-color: var(--paper);
+  color: var(--ink);
   font-family: 'Inter', system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: 'Fraunces', serif;
+}
+
+.font-mono-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticket-card {
+  position: relative;
+  background: white;
+  border: 1px solid rgba(43, 36, 32, 0.08);
+  border-radius: 4px;
+}
+
+.ticket-card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(43, 36, 32, 0.18) 0,
+    rgba(43, 36, 32, 0.18) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+.ticket-number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--brass);
+  letter-spacing: 0.05em;
+}
+
+.stamp {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1.5px solid currentColor;
+  border-radius: 3px;
+  padding: 2px 8px;
+  display: inline-block;
+  transform: rotate(-2deg);
 }
