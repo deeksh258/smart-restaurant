@@ -25,9 +25,7 @@ export default function DashboardPage() {
       .from('orders')
       .select('total_amount, created_at')
       .gte('created_at', todayStart.toISOString());
-
     const { data: tables } = await supabase.from('restaurant_tables').select('status');
-
     const { data: ingredients } = await supabase
       .from('ingredients')
       .select('current_stock, low_stock_threshold');
@@ -43,38 +41,33 @@ export default function DashboardPage() {
     });
   }
 
+  const cards = [
+    { label: 'Revenue today', value: `₹${metrics.revenueToday}` },
+    { label: 'Orders today', value: metrics.ordersToday },
+    { label: 'Occupied tables', value: `${metrics.occupiedTables}/${metrics.totalTables}` },
+    { label: 'Low stock items', value: metrics.lowStockCount, alert: metrics.lowStockCount > 0 },
+  ];
+
   return (
-    <main className="min-h-screen bg-bg px-6 py-10 max-w-3xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
+    <main className="min-h-screen bg-paper px-6 py-12 max-w-3xl mx-auto">
+      <div className="flex items-center justify-between mb-10 flex-wrap gap-3">
         <div>
-          <p className="text-xs uppercase tracking-wide text-accent mb-1">Staff</p>
-          <h1 className="text-2xl font-semibold text-ink">Dashboard</h1>
+          <p className="ticket-number mb-2">STAFF ACCESS</p>
+          <h1 className="font-display text-3xl text-ink">Dashboard</h1>
         </div>
         <nav className="flex gap-2 text-sm">
-          <Link href="/admin/inventory" className="px-3 py-1.5 rounded-full border border-ink/15">Inventory</Link>
-          <Link href="/admin/tables" className="px-3 py-1.5 rounded-full border border-ink/15">Tables</Link>
+          <Link href="/admin/inventory" className="px-4 py-2 rounded-full border border-ink/15 text-ink">Inventory</Link>
+          <Link href="/admin/tables" className="px-4 py-2 rounded-full border border-ink/15 text-ink">Tables</Link>
         </nav>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="bg-white border border-ink/10 rounded-xl p-4">
-          <p className="text-xs text-ink/50 uppercase">Revenue today</p>
-          <p className="text-2xl font-semibold text-ink mt-1">₹{metrics.revenueToday}</p>
-        </div>
-        <div className="bg-white border border-ink/10 rounded-xl p-4">
-          <p className="text-xs text-ink/50 uppercase">Orders today</p>
-          <p className="text-2xl font-semibold text-ink mt-1">{metrics.ordersToday}</p>
-        </div>
-        <div className="bg-white border border-ink/10 rounded-xl p-4">
-          <p className="text-xs text-ink/50 uppercase">Occupied tables</p>
-          <p className="text-2xl font-semibold text-ink mt-1">
-            {metrics.occupiedTables}/{metrics.totalTables}
-          </p>
-        </div>
-        <div className="bg-white border border-ink/10 rounded-xl p-4">
-          <p className="text-xs text-ink/50 uppercase">Low stock items</p>
-          <p className="text-2xl font-semibold text-ink mt-1">{metrics.lowStockCount}</p>
-        </div>
+        {cards.map((c) => (
+          <div key={c.label} className="ticket-card p-5">
+            <p className="ticket-number mb-2">{c.label.toUpperCase()}</p>
+            <p className={`font-display text-3xl ${c.alert ? 'text-rust' : 'text-ink'}`}>{c.value}</p>
+          </div>
+        ))}
       </div>
     </main>
   );
