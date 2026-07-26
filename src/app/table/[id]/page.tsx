@@ -44,31 +44,31 @@ export default function TableQRPage({ params }: { params: { id: string } }) {
     }
   }
 
-  if (!table) return <main className="p-10 text-center text-ink/50">Loading table…</main>;
+  if (!table) return <main className="min-h-screen bg-paper p-10 text-center text-ink/50">Loading table…</main>;
 
   return (
-    <main className="min-h-screen bg-bg flex flex-col items-center justify-center px-6 text-center">
-      <p className="text-sm uppercase tracking-wide text-accent mb-1">Table</p>
-      <h1 className="text-5xl font-semibold text-ink mb-6">{table.table_number}</h1>
+    <main className="min-h-screen bg-coal text-paper flex flex-col items-center justify-center px-6 text-center">
+      <p className="ticket-number mb-1">TABLE</p>
+      <h1 className="font-display text-7xl mb-8">{table.table_number}</h1>
 
       {waiter ? (
-        <div className="bg-white border border-ink/10 rounded-2xl p-6 w-full max-w-sm mb-6">
-          <p className="text-sm text-ink/50 mb-1">Your waiter</p>
-          <p className="text-xl font-medium text-ink mb-2">{waiter.name}</p>
-          <a
+        <div className="bg-paper text-ink rounded-2xl p-6 w-full max-w-sm mb-6 ticket-card">
+          <p className="ticket-number mb-1">YOUR WAITER</p>
+          <p className="font-display text-2xl mb-3">{waiter.name}</p>
+          
             href={`tel:${waiter.phone}`}
-            className="inline-block mt-2 px-5 py-2 rounded-full bg-accent text-white text-sm"
+            className="inline-block px-5 py-2.5 rounded-full bg-brass text-coal text-sm font-semibold"
           >
             Call {waiter.name.split(' ')[0]}
           </a>
         </div>
       ) : (
-        <p className="text-ink/50 mb-6">No waiter assigned yet — a staff member will be with you shortly.</p>
+        <p className="text-paper/50 mb-6">No waiter assigned yet — a staff member will be with you shortly.</p>
       )}
 
       <Link
         href="/menu"
-        className="px-5 py-2 rounded-full border border-ink/20 text-ink text-sm"
+        className="px-5 py-2.5 rounded-full border border-paper/25 text-paper text-sm"
       >
         View Menu &amp; Order
       </Link>
