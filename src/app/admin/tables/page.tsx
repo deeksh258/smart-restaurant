@@ -44,42 +44,38 @@ export default function TablesPage() {
     fetchData();
   }
 
-  function waiterName(id: string | null) {
-    return staff.find((s) => s.id === id)?.name || 'Unassigned';
-  }
-
-  const statusColor: Record<string, string> = {
-    vacant: 'bg-sage-soft',
-    occupied: 'bg-brick-soft',
-    reserved: 'bg-mustard-soft',
-    needs_cleaning: 'bg-ink/10',
+  const statusStyle: Record<string, string> = {
+    vacant: 'bg-sage-soft text-sage',
+    occupied: 'bg-rust-soft text-rust',
+    reserved: 'bg-brass-soft text-brass',
+    needs_cleaning: 'bg-ink/10 text-ink/50',
   };
 
   return (
-    <main className="min-h-screen bg-bg px-6 py-10 max-w-3xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
+    <main className="min-h-screen bg-paper px-6 py-12 max-w-3xl mx-auto">
+      <div className="flex items-center justify-between mb-10 flex-wrap gap-3">
         <div>
-          <p className="text-xs uppercase tracking-wide text-accent mb-1">Staff</p>
-          <h1 className="text-2xl font-semibold text-ink">Tables</h1>
+          <p className="ticket-number mb-2">STAFF ACCESS</p>
+          <h1 className="font-display text-3xl text-ink">Tables</h1>
         </div>
         <nav className="flex gap-2 text-sm">
-          <Link href="/admin/dashboard" className="px-3 py-1.5 rounded-full border border-ink/15">Dashboard</Link>
-          <Link href="/admin/inventory" className="px-3 py-1.5 rounded-full border border-ink/15">Inventory</Link>
+          <Link href="/admin/dashboard" className="px-4 py-2 rounded-full border border-ink/15 text-ink">Dashboard</Link>
+          <Link href="/admin/inventory" className="px-4 py-2 rounded-full border border-ink/15 text-ink">Inventory</Link>
         </nav>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {tables.map((t) => (
-          <div
-            key={t.id}
-            className={`rounded-xl border border-ink/10 p-4 text-center ${statusColor[t.status] || 'bg-white'}`}
-          >
-            <p className="text-2xl font-semibold text-ink">{t.table_number}</p>
-            <p className="text-xs uppercase text-ink/50 mb-2">{t.status} · {t.seats} seats</p>
+          <div key={t.id} className="ticket-card p-5 text-center">
+            <p className="font-display text-3xl text-ink">{t.table_number}</p>
+            <span className={`stamp mt-2 mb-3 ${statusStyle[t.status] || 'bg-ink/5 text-ink/50'}`}>
+              {t.status}
+            </span>
+            <p className="font-mono-num text-xs text-ink/45 mb-3">{t.seats} SEATS</p>
             <select
               value={t.assigned_waiter_id || ''}
               onChange={(e) => reassignWaiter(t.id, e.target.value)}
-              className="text-xs w-full px-2 py-1 rounded-lg border border-ink/15 bg-white"
+              className="text-xs w-full px-2 py-2 rounded-lg border border-ink/15 bg-paper"
             >
               <option value="">Unassigned</option>
               {staff.map((s) => (
