@@ -28,7 +28,6 @@ export default function BookPage() {
         advance_paid: true,
         email_verified: true,
       });
-
       if (error) throw error;
 
       setBookingSummary(
@@ -44,38 +43,37 @@ export default function BookPage() {
   }
 
   return (
-    <main className="min-h-screen bg-bg px-6 py-10 max-w-md mx-auto">
-      <h1 className="text-2xl font-semibold text-ink mb-2">Book a table</h1>
-      <p className="text-ink/50 text-sm mb-8">
+    <main className="min-h-screen bg-paper px-6 py-12 max-w-md mx-auto">
+      <p className="ticket-number mb-2">RESERVATION</p>
+      <h1 className="font-display text-3xl text-ink mb-2">Book a table</h1>
+      <p className="text-ink/55 text-sm mb-8 leading-relaxed">
         A 50% advance and email verification confirm the booking — this protects the kitchen from no-shows.
       </p>
 
       {step === 'form' && (
-        <div className="bg-white border border-ink/10 rounded-xl p-5">
-          <label className="text-xs text-ink/50 block mb-1">Party size</label>
+        <div className="ticket-card p-6">
+          <label className="ticket-number block mb-1">PARTY SIZE</label>
           <select
             value={size}
             onChange={(e) => setSize(Number(e.target.value))}
-            className="w-full mb-4 px-3 py-2 rounded-lg border border-ink/10 bg-bg"
+            className="w-full mb-4 px-3 py-2.5 rounded-lg border border-ink/12 bg-paper text-sm"
           >
-            {[2, 3, 4, 6].map((n) => (
-              <option key={n} value={n}>{n}</option>
-            ))}
+            {[2, 3, 4, 6].map((n) => <option key={n} value={n}>{n} guests</option>)}
           </select>
 
-          <label className="text-xs text-ink/50 block mb-1">Arrival time</label>
+          <label className="ticket-number block mb-1">ARRIVAL TIME</label>
           <input
             type="time"
             value={time}
             onChange={(e) => setTime(e.target.value)}
-            className="w-full mb-4 px-3 py-2 rounded-lg border border-ink/10 bg-bg"
+            className="w-full mb-4 px-3 py-2.5 rounded-lg border border-ink/12 bg-paper text-sm"
           />
 
-          <label className="text-xs text-ink/50 block mb-1">Meal duration</label>
+          <label className="ticket-number block mb-1">MEAL DURATION</label>
           <select
             value={duration}
             onChange={(e) => setDuration(Number(e.target.value))}
-            className="w-full mb-4 px-3 py-2 rounded-lg border border-ink/10 bg-bg"
+            className="w-full mb-5 px-3 py-2.5 rounded-lg border border-ink/12 bg-paper text-sm"
           >
             <option value={45}>45 min</option>
             <option value={60}>60 min</option>
@@ -84,7 +82,7 @@ export default function BookPage() {
 
           <button
             onClick={() => setStep('payment')}
-            className="w-full mt-2 py-2.5 rounded-full bg-accent text-white text-sm font-medium"
+            className="w-full py-3 rounded-full bg-brass text-coal text-sm font-semibold"
           >
             Continue — pay 50% advance
           </button>
@@ -92,27 +90,27 @@ export default function BookPage() {
       )}
 
       {step === 'payment' && (
-        <div className="bg-white border border-ink/10 rounded-xl p-5">
-          <h3 className="font-medium text-ink mb-1">Confirm booking</h3>
-          <p className="text-xs text-ink/50 mb-4">
+        <div className="ticket-card p-6">
+          <h3 className="font-display text-xl text-ink mb-1">Confirm booking</h3>
+          <p className="text-xs text-ink/50 mb-5">
             Simulated payment for the hackathon demo — no real transaction occurs.
           </p>
 
-          <label className="text-xs text-ink/50 block mb-1">Advance amount</label>
-          <input value="₹300.00" disabled className="w-full mb-4 px-3 py-2 rounded-lg border border-ink/10 bg-bg text-ink/50" />
+          <label className="ticket-number block mb-1">ADVANCE AMOUNT</label>
+          <input value="₹300.00" disabled className="font-mono-num w-full mb-4 px-3 py-2.5 rounded-lg border border-ink/12 bg-ink/5 text-ink/50 text-sm" />
 
-          <label className="text-xs text-ink/50 block mb-1">Email</label>
+          <label className="ticket-number block mb-1">EMAIL</label>
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="w-full mb-4 px-3 py-2 rounded-lg border border-ink/10 bg-bg"
+            className="w-full mb-5 px-3 py-2.5 rounded-lg border border-ink/12 bg-paper text-sm"
           />
 
           <button
             onClick={confirmBooking}
             disabled={saving}
-            className="w-full mt-2 py-2.5 rounded-full bg-accent text-white text-sm font-medium disabled:opacity-50"
+            className="w-full py-3 rounded-full bg-brass text-coal text-sm font-semibold disabled:opacity-50"
           >
             {saving ? 'Confirming…' : 'Pay & verify email'}
           </button>
@@ -120,9 +118,9 @@ export default function BookPage() {
       )}
 
       {step === 'done' && (
-        <div className="bg-white border border-ink/10 rounded-xl p-5">
-          <h3 className="font-medium text-good mb-2">Booking confirmed</h3>
-          <p className="text-sm text-ink/60">{bookingSummary}</p>
+        <div className="ticket-card p-6">
+          <span className="stamp text-sage mb-3">Confirmed</span>
+          <p className="text-sm text-ink/65 mt-3 leading-relaxed">{bookingSummary}</p>
         </div>
       )}
     </main>
