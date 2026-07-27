@@ -79,4 +79,4 @@ supabase/
 ```
 
 ## Hosted Application Link
-_(fill in after deployment)_
+https://odd-thinker-smart-restaurant.vercel.app/
